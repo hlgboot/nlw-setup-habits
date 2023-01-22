@@ -21,7 +21,7 @@
   <a href="#dart-about">About</a> &#xa0; | &#xa0;
   <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
   <a href="#hammer-technologies">Technologies</a> &#xa0; | &#xa0;
-  <a href="#rocket-want-to-run-in-your-machine">Starting</a> &#xa0; | &#xa0;
+  <a href="#rocket-want-to-run-in-your-machine">Running</a> &#xa0; | &#xa0;
   <a href="#memo-license">License</a> &#xa0; | &#xa0;
   <a href="https://github.com/hlgboot" target="_blank">Author</a>
 </p>
