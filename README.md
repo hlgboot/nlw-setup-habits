@@ -47,7 +47,7 @@ Project developed at the NLW Setup event by [Rocketseat Education](https://githu
 
 ## :hammer: Technologies ##
 
-The following tools were used in this project:
+The following tools were used to build this project:
 
 - [Node.js](https://nodejs.org/en/)
 - [SQLite](https://www.sqlite.org/index.html) 
@@ -64,7 +64,7 @@ The following tools were used in this project:
 - [TypeScript](https://www.typescriptlang.org/)
 - [TailwindCSS](https://tailwindcss.com/)
 
-## :rocket: Starting ##
+## :rocket: Want to run in your machine? ##
 
 ```bash
 # Clone this project
@@ -94,7 +94,7 @@ $ npx expo start --clear
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
-Made with :heart: by <a href="https://github.com/hlgboot" target="_blank">Matheus Henriques</a>
+Made with 💜 by [Matheus Henriques](https://github.com/hlgboot)
 
 &#xa0;
 
