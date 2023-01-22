@@ -2,14 +2,16 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-const firstHabitId = '0730ffac-d039-4194-9571-01aa2aa0efbd'
-const firstHabitCreationDate = new Date('2022-12-31T03:00:00.000')
+const HabitCreationDate = new Date('2022-12-31T03:00:00.000')
 
-const secondHabitId = '00880d75-a933-4fef-94ab-e05744435297'
-const secondHabitCreationDate = new Date('2023-01-03T03:00:00.000')
+const journalHabitId = '0730ffac-d039-4194-9571-01aa2aa0efbd'
 
-const thirdHabitId = 'fa1a1bcf-3d87-4626-8c0d-d7fd1255ac00'
-const thirdHabitCreationDate = new Date('2023-01-08T03:00:00.000')
+const workoutHabitId = '00880d75-a933-4fef-94ab-e05744435297'
+
+const readHabitId = 'fa1a1bcf-3d87-4626-8c0d-d7fd1255ac00'
+
+const meditateHabitId = '030c65c4-b985-4a59-b1d5-691242fbdc15'
+
 
 async function run() {
   await prisma.habit.deleteMany()
@@ -21,14 +23,18 @@ async function run() {
   await Promise.all([
     prisma.habit.create({
       data: {
-        id: firstHabitId,
-        title: 'Beber 2L água',
-        created_at: firstHabitCreationDate,
+        id: journalHabitId,
+        title: 'Journaling',
+        created_at: HabitCreationDate,
         weekDays: {
           create: [
+            { week_day: 0 },
             { week_day: 1 },
             { week_day: 2 },
             { week_day: 3 },
+            { week_day: 4 },
+            { week_day: 5 },
+            { week_day: 6 },
           ]
         }
       }
@@ -36,14 +42,18 @@ async function run() {
 
     prisma.habit.create({
       data: {
-        id: secondHabitId,
-        title: 'Exercitar',
-        created_at: secondHabitCreationDate,
+        id: workoutHabitId,
+        title: 'Workout',
+        created_at: HabitCreationDate,
         weekDays: {
           create: [
+            { week_day: 0 },
+            { week_day: 1 },
+            { week_day: 2 },
             { week_day: 3 },
             { week_day: 4 },
             { week_day: 5 },
+            { week_day: 6 },
           ]
         }
       }
@@ -51,16 +61,37 @@ async function run() {
 
     prisma.habit.create({
       data: {
-        id: thirdHabitId,
-        title: 'Dormir 8h',
-        created_at: thirdHabitCreationDate,
+        id: readHabitId,
+        title: 'Reading',
+        created_at: HabitCreationDate,
         weekDays: {
           create: [
+            { week_day: 0 },
             { week_day: 1 },
             { week_day: 2 },
             { week_day: 3 },
             { week_day: 4 },
             { week_day: 5 },
+            { week_day: 6 },
+          ]
+        }
+      }
+    }),
+
+    prisma.habit.create({
+      data: {
+        id: meditateHabitId,
+        title: 'Meditate',
+        created_at: HabitCreationDate,
+        weekDays: {
+          create: [
+            { week_day: 0 },
+            { week_day: 1 },
+            { week_day: 2 },
+            { week_day: 3 },
+            { week_day: 4 },
+            { week_day: 5 },
+            { week_day: 6 },
           ]
         }
       }
@@ -69,50 +100,327 @@ async function run() {
 
   await Promise.all([
     /**
-     * Habits (Complete/Available): 1/1
+     * Habits (Complete/Available): 4/4
      */
     prisma.day.create({
       data: {
-        /** Monday */
-        date: new Date('2023-01-02T03:00:00.000z'),
-        dayHabits: {
-          create: {
-            habit_id: firstHabitId,
-          }
-        }
-      }
-    }),
-
-    /**
-     * Habits (Complete/Available): 1/1
-     */
-    prisma.day.create({
-      data: {
-        /** Friday */
-        date: new Date('2023-01-06T03:00:00.000z'),
-        dayHabits: {
-          create: {
-            habit_id: firstHabitId,
-          }
-        }
-      }
-    }),
-
-    /**
-     * Habits (Complete/Available): 2/2
-     */
-    prisma.day.create({
-      data: {
-        /** Wednesday */
-        date: new Date('2023-01-04T03:00:00.000z'),
+        /** 1st */
+        date: new Date('2023-01-01T03:00:00.000z'),
         dayHabits: {
           create: [
-            { habit_id: firstHabitId },
-            { habit_id: secondHabitId },
+            { habit_id: journalHabitId },
+            { habit_id: workoutHabitId },
+            { habit_id: readHabitId },
+            { habit_id: meditateHabitId },
           ]
         }
       }
     }),
+
+    /**
+     * Habits (Complete/Available): 3/4
+     */
+    prisma.day.create({
+      data: {
+        /** 2nd */
+        date: new Date('2023-01-02T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: journalHabitId },
+            { habit_id: meditateHabitId },
+            { habit_id: readHabitId },
+          ]
+        }
+      }
+    }),
+
+    /**
+     * Habits (Complete/Available): 3/4
+     */
+    prisma.day.create({
+      data: {
+        /** 3rd */
+        date: new Date('2023-01-03T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: journalHabitId },
+            { habit_id: meditateHabitId },
+            { habit_id: readHabitId },
+          ]
+        }
+      }
+    }),
+
+    /**
+     * Habits (Complete/Available): 2/4
+     */
+    prisma.day.create({
+      data: {
+        /** 4th */
+        date: new Date('2023-01-04T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: journalHabitId },
+            { habit_id: meditateHabitId },
+          ]
+        }
+      }
+    }),
+    
+    /**
+     * Habits (Complete/Available): 4/4
+     */
+    prisma.day.create({
+      data: {
+        /** 5th */
+        date: new Date('2023-01-05T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: journalHabitId },
+            { habit_id: meditateHabitId },
+            { habit_id: readHabitId },
+            { habit_id: workoutHabitId }
+          ]
+        }
+      }
+    }),
+
+    /**
+     * Habits (Complete/Available): 3/4
+     */
+    prisma.day.create({
+      data: {
+        /** 6th */
+        date: new Date('2023-01-06T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: journalHabitId },
+            { habit_id: meditateHabitId },
+            { habit_id: workoutHabitId },
+          ]
+        }
+      }
+    }),
+
+    /**
+     * Habits (Complete/Available): 3/4
+     */
+    prisma.day.create({
+      data: {
+        /** 7th */
+        date: new Date('2023-01-07T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: journalHabitId },
+            { habit_id: meditateHabitId },
+            { habit_id: workoutHabitId },
+          ]
+        }
+      }
+    }),
+
+    /**
+     * Habits (Complete/Available): 4/4
+     */
+    prisma.day.create({
+      data: {
+        /** 8th */
+        date: new Date('2023-01-08T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: journalHabitId },
+            { habit_id: meditateHabitId },
+            { habit_id: readHabitId },
+            { habit_id: workoutHabitId }
+          ]
+        }
+      }
+    }),
+
+    /**
+     * Habits (Complete/Available): 3/4
+     */
+    prisma.day.create({
+      data: {
+        /** 9th */
+        date: new Date('2023-01-09T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: journalHabitId },
+            { habit_id: meditateHabitId },
+            { habit_id: workoutHabitId },
+          ]
+        }
+      }
+    }),
+
+    /**
+     * Habits (Complete/Available): 2/4
+     */
+    prisma.day.create({
+      data: {
+        /** 10th */
+        date: new Date('2023-01-10T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: journalHabitId },
+            { habit_id: workoutHabitId },
+          ]
+        }
+      }
+    }),    
+    
+    /**
+     * Habits (Complete/Available): 4/4
+     */
+    prisma.day.create({
+      data: {
+        /** 11th */
+        date: new Date('2023-01-11T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: journalHabitId },
+            { habit_id: meditateHabitId },
+            { habit_id: readHabitId },
+            { habit_id: workoutHabitId }
+          ]
+        }
+      }
+    }),
+
+    /**
+     * Habits (Complete/Available): 4/4
+     */
+    prisma.day.create({
+      data: {
+        /** 12th */
+        date: new Date('2023-01-12T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: journalHabitId },
+            { habit_id: meditateHabitId },
+            { habit_id: readHabitId },
+            { habit_id: workoutHabitId }
+          ]
+        }
+      }
+    }),    
+
+    /**
+     * Habits (Complete/Available): 4/4
+     */
+    prisma.day.create({
+      data: {
+        /** 13th */
+        date: new Date('2023-01-13T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: journalHabitId },
+            { habit_id: meditateHabitId },
+            { habit_id: readHabitId },
+            { habit_id: workoutHabitId }
+          ]
+        }
+      }
+    }),
+    
+    /**
+     * Habits (Complete/Available): 2/4
+     */
+    prisma.day.create({
+      data: {
+        /** 14th */
+        date: new Date('2023-01-14T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: meditateHabitId },
+            { habit_id: readHabitId },
+          ]
+        }
+      }
+    }),     
+
+    /**
+     * Habits (Complete/Available): 2/4
+     */
+    prisma.day.create({
+      data: {
+        /** 15th */
+        date: new Date('2023-01-15T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: journalHabitId },
+            { habit_id: meditateHabitId },
+          ]
+        }
+      }
+    }), 
+
+    /**
+     * Habits (Complete/Available): 3/4
+     */
+    prisma.day.create({
+      data: {
+        /** 16th */
+        date: new Date('2023-01-16T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: meditateHabitId },
+            { habit_id: readHabitId },
+            { habit_id: workoutHabitId }
+          ]
+        }
+      }
+    }),
+    
+    /**
+     * Habits (Complete/Available): 2/4
+     */
+    prisma.day.create({
+      data: {
+        /** 17th */
+        date: new Date('2023-01-17T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: meditateHabitId },
+            { habit_id: workoutHabitId }
+          ]
+        }
+      }
+    }),
+    
+    /**
+     * Habits (Complete/Available): 3/4
+     */
+    prisma.day.create({
+      data: {
+        /** 19th */
+        date: new Date('2023-01-19T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: meditateHabitId },
+            { habit_id: readHabitId },
+            { habit_id: workoutHabitId }
+          ]
+        }
+      }
+    }),
+    
+    /**
+     * Habits (Complete/Available): 1/4
+     */
+    prisma.day.create({
+      data: {
+        /** 20th */
+        date: new Date('2023-01-20T03:00:00.000z'),
+        dayHabits: {
+          create: [
+            { habit_id: workoutHabitId }
+          ]
+        }
+      }
+    }), 
+
   ])
 }
 
